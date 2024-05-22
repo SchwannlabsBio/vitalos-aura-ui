@@ -4,10 +4,12 @@ import TopBar from "@/components/blocks/TopBar";
 import SideBar from "@/components/blocks/SideBar";
 import VitalPlot from "@/components/ui/vital-plot";
 import VitalTrend from "@/components/ui/vital-trend";
+import ModuleInitialised from "@/components/blocks/ModuleInitialised";
 
 export default function Page() {
     return (
         <div className="flex flex-col h-screen w-full bg-muted/40">
+            <ModuleInitialised />
             <TopBar />
             <div className="flex h-full">
                 <SideBar />
