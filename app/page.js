@@ -4,6 +4,7 @@
 import { listen } from '@tauri-apps/api/event'
 import { invoke } from "@tauri-apps/api";
 import { useEffect } from "react";
+import { ModuleStore } from "@/context/ModuleContext";
 
 // UI Imports
 import TopBar from "@/components/blocks/TopBar";
@@ -13,13 +14,19 @@ import VitalTrend from "@/components/ui/vital-trend";
 import ModuleInitialised from "@/components/blocks/ModuleInitialised";
 
 
-
 export default function Page() {
+    const setModuleState = ModuleStore(state => state.setModuleState);
+
     // Initialise Module Manager Thread.
     useEffect(() => {
         invoke('init_module_manager');
         const unlisten = listen('module-message', (event) => {
-            console.log('Received event:', event.payload.message);
+            if(event.payload.message.includes("MODULE_CONN")) {
+                setModuleState(true)
+            }
+            else if(event.payload.message.includes("MODULE_DISCONN")) {
+                setModuleState(false)
+            }
         });
 
         return () => {
@@ -28,7 +35,6 @@ export default function Page() {
 
     }, []);
 
-    // Create Module
     return (
         <div className="flex flex-col h-screen w-full bg-muted/40">
             <ModuleInitialised />
