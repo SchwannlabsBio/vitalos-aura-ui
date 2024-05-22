@@ -1,12 +1,34 @@
 "use client"
 
+// Library Imports
+import { listen } from '@tauri-apps/api/event'
+import { invoke } from "@tauri-apps/api";
+import { useEffect } from "react";
+
+// UI Imports
 import TopBar from "@/components/blocks/TopBar";
 import SideBar from "@/components/blocks/SideBar";
 import VitalPlot from "@/components/ui/vital-plot";
 import VitalTrend from "@/components/ui/vital-trend";
 import ModuleInitialised from "@/components/blocks/ModuleInitialised";
 
+
+
 export default function Page() {
+    // Initialise Module Manager Thread.
+    useEffect(() => {
+        invoke('init_module_manager');
+        const unlisten = listen('module-message', (event) => {
+            console.log('Received event:', event.payload.message);
+        });
+
+        return () => {
+            unlisten.then(f => f());
+        };
+
+    }, []);
+
+    // Create Module
     return (
         <div className="flex flex-col h-screen w-full bg-muted/40">
             <ModuleInitialised />
