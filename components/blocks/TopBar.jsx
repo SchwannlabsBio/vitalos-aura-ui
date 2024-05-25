@@ -3,7 +3,7 @@ import { WifiIcon, BatteryChargingIcon, SignalIcon } from "lucide-react";
 
 export default function TopBar() {
     return (
-        <div className="flex items-center justify-between bg-background px-4 py-6 text-white">
+        <div className="flex items-center sticky justify-between bg-background px-4 py-6 text-white">
             <div className="flex items-center space-x-4">
                 <Clock />
                 <span className="font-light">Ziyad Hameed</span>

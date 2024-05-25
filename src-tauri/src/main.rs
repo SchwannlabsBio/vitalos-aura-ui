@@ -24,10 +24,8 @@ async fn init_module_manager(window: Window) {
 
   subscriber.connect("tcp://localhost:5556").expect("Failed to connect to the publisher");
 
-  let topics = vec!["MODULE_MESSAGE", "ANOTHER_TOPIC"];
-  for topic in topics {
-    subscriber.set_subscribe(topic.as_bytes()).expect("Failed to subscribe to topic");
-  }
+
+  subscriber.set_subscribe(b"").expect("Failed to subscribe to all topic");
 
   thread::spawn(move || {
     loop {
