@@ -12,7 +12,7 @@ let colours = {
 export default function VitalTrend({ children, ...props}) {
     return (
         <div>
-            <Card className={cn("rounded-lg shadow-md p-2 mb-2")}>
+            <Card className={cn("rounded-lg shadow-md h-48")}>
                 <CardHeader>
                     <CardTitle className={cn("text-sm",colours[props.name])}>
                         {props.name || "I"}

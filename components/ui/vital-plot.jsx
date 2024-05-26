@@ -11,14 +11,15 @@ let colours = {
 export default function VitalPlot({ children, ...props}) {
     return (
         <div>
-            <Card className={cn("rounded-lg shadow-md p-2 mb-2")}>
-                <CardHeader>
-                    <CardTitle className={cn("text-sm",colours[props.name])}>
-                        {props.name || "I"}
-                    </CardTitle>
-                </CardHeader>
-                <CardContent className="h-16 p-0">
-                    {/*<LineChart className="w-full h-full" />*/}
+            <Card className={cn("rounded-lg shadow-md h-48")}>
+                <CardContent className="h-44 p-2">
+                    <iframe
+                        src="/schwann-plots.html"
+                        className="w-full h-full"
+                        style={{
+                            border: 'none',
+                        }}
+                    ></iframe>
                 </CardContent>
             </Card>
         </div>
