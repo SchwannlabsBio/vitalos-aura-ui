@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="Aura VM" type="ssh/sftp" uuid="7b57cfba-c87a-47bd-adff-081e8d28f7cc">
+        <config>
+          <option name="projectRootOnTarget" value="/home/schwannlabs/vitalos-aura-ui" />
+          <option name="serverName" value="schwannlabs@192.168.64.4:22 password" />
+          <option name="useRsync" value="true" />
+        </config>
+        <ContributedStateBase type="RsLanguageRuntime">
+          <config>
+            <option name="cargoPath" value="/home/schwannlabs/.cargo/bin/cargo" />
+            <option name="cargoVersion" value="1.78.0 (54d8815d0 2024-03-26)" />
+            <option name="rustcPath" value="/home/schwannlabs/.cargo/bin/rustc" />
+            <option name="rustcVersion" value="1.78.0 (9b00956e5 2024-04-29)" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>

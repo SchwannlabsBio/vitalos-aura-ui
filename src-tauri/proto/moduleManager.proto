@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package ModuleManager;
+
+// Message for ConnData
+message ConnData {
+    string slot = 1;
+    string slotFile = 2;
+}
+
+enum ErrorCode {
+    UNKNOWN_ERROR = 0;
+    COMMUNICATION_ERROR = 1;
+    SENSOR_FAILURE = 2;
+    CALIBRATION_ERROR = 3;
+    BATTERY_LOW = 4;
+}
+
+enum ModuleType {
+    MVM = 0;
+    etCO2 = 1;
+    CO = 2;
+    BIS = 3;
+    IBP = 4;
+    EEG = 5;
+}
+
+message ModuleInfoData {
+    string firmware = 1;
+    string serialID = 2;
+    repeated ErrorCode errorCodes = 3;
+}
+
+// Top-level message for the data to be sent over ZeroMQ
+message ModuleData {
+    ModuleType module_type = 1;
+    oneof data {
+        ConnData connData = 2;
+        ModuleInfoData moduleInfoData = 3;
+    }
+}

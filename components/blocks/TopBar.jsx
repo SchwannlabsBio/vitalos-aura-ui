@@ -1,17 +1,38 @@
 import Clock from "@/components/clock";
 import { WifiIcon, BatteryChargingIcon, SignalIcon } from "lucide-react";
+import {AlertStore} from "@/context/AlertContext";
 
 export default function TopBar() {
+    const alerts = AlertStore(state => state.alerts);
     return (
-        <div className="flex items-center justify-between bg-background px-4 py-6 text-white">
+        <div className="flex items-center sticky justify-between bg-background px-4 py-8 text-white">
             <div className="flex items-center space-x-4">
                 <Clock />
                 <span className="font-light">Ziyad Hameed</span>
                 <span className="font-light">Adult</span>
             </div>
             <div className="flex items-center space-x-4 text-bold">
-                <div className="bg-red-500 text-white px-2 py-1 rounded-md">High BP</div>
-                <div className="bg-yellow-400 text-black px-2 py-1 rounded-md">Low Temp</div>
+                {alerts.map((alert, index) => {
+                    if (alert.type === 'urgent') {
+                        return (
+                            <div key={index} className="bg-red-500 text-white px-2 py-1 rounded-md">
+                                {alert.message}
+                            </div>
+                        );
+                    } else if (alert.type === 'warning') {
+                        return (
+                            <div key={index} className="bg-yellow-400 text-black px-2 py-1 rounded-md">
+                                {alert.message}
+                            </div>
+                        );
+                    } else {
+                        return (
+                            <div key={index} className="bg-blue-200 text-black px-2 py-1 rounded-md">
+                                {alert.message}
+                            </div>
+                        );
+                    }
+                })}
             </div>
             <div className="flex items-center space-x-4">
                 <WifiIcon className="h-6 w-6"/>

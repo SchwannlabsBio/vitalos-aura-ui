@@ -1,6 +1,6 @@
-import { useRef, useState } from "react"
+import { Suspense, useRef } from 'react'
 import { Canvas, useFrame } from "@react-three/fiber"
-import { useGLTF, OrbitControls } from "@react-three/drei"
+import { useGLTF, OrbitControls, Stage } from "@react-three/drei"
 import { proxy, useSnapshot } from "valtio"
 
 const state = proxy({
@@ -9,16 +9,18 @@ const state = proxy({
 })
 
 export default function Model3D() {
+    const ref = useRef()
     return (
         <>
-            <Canvas shadows camera={{position: [0, 0, 4], fov: 45}}>
-                <ambientLight intensity={0.7}/>
-                <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, -5]} castShadow/>
-                {/*<ambientLight intensity={0.7} />*/}
-                {/*<spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} />*/}
-                <Shoe/>
-                <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} enableZoom={false}
-                               enablePan={false}/>
+            <Canvas shadows dpr={[1, 2]} camera={{ fov: 50 }}>
+                <Suspense fallback={null}>
+                    <Stage controls={ref} preset="rembrandt" intensity={1}  environment="city">
+                        false
+                        <Model />
+                        false
+                    </Stage>
+                </Suspense>
+                <OrbitControls ref={ref} autoRotate />
             </Canvas>
         </>
     )
@@ -49,4 +51,40 @@ function Shoe() {
         </group>
     )
 }
+
+export function Model(props) {
+    const { nodes, materials } = useGLTF('/etco2.glb')
+    return (
+        <group {...props} dispose={null} scale={[0.5, 0.5, 0.5]}>
+            <group rotation={[Math.PI / 2, 0, 0]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.etCO2_Module_v2_1.geometry}
+                    material={materials['Tough_2000_(with_Formlabs_SLA_3D_Printers)']}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.etCO2_Module_v2_2.geometry}
+                    material={materials['ABS_(White)']}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.etCO2_Module_v2_3.geometry}
+                    material={materials['Powder_Coat_(Yellow)']}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.etCO2_Module_v2_4.geometry}
+                    material={materials['Steel_-_Satin']}
+                />
+            </group>
+        </group>
+    )
+}
+
+useGLTF.preload('/etco2.glb')
 
