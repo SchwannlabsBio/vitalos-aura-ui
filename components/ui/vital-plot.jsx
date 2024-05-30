@@ -1,5 +1,6 @@
 import { Card, CardTitle, CardHeader, CardContent} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import SchwannPlot from "@/components/ui/schwann-plot";
 
 let colours = {
     "I": "text-green-500",
@@ -12,13 +13,8 @@ export default function VitalPlot({ children, ...props}) {
     return (
         <div>
             <Card className={cn("rounded-lg shadow-md p-2 mb-2")}>
-                <CardHeader>
-                    <CardTitle className={cn("text-sm",colours[props.name])}>
-                        {props.name || "I"}
-                    </CardTitle>
-                </CardHeader>
-                <CardContent className="h-16 p-0">
-                    {/*<LineChart className="w-full h-full" />*/}
+                <CardContent className="h-36 p-0">
+                    {props.name === `I` ? <SchwannPlot/> : <div></div>}
                 </CardContent>
             </Card>
         </div>

@@ -96,6 +96,20 @@ export default function SideBar() {
                         <TooltipContent side="right">Discharge Patient</TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Link
+                                href="/plot"
+                                className="flex h-16 w-16 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-9 md:w-9"
+                            >
+                                <UserMinus className="h-5 w-5"/>
+                                <span className="sr-only">Plot Test</span>
+                            </Link>
+                        </TooltipTrigger>
+                        <TooltipContent side="right">Plot Test</TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
             </nav>
             <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
                 <TooltipProvider>
