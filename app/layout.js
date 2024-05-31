@@ -35,6 +35,7 @@ export default function RootLayout({ children }) {
         invoke('init_module_manager');
         const unlisten = listen('module-message', (event) => {
             let data = event.payload
+            console.log(data)
             ModuleMessageHandler(data, moduleStore, alertStore)
         });
 
