@@ -1,7 +1,7 @@
 mod handler;
 
 use std::thread;
-use tauri::{Window};
+use tauri::{Window,Manager};
 use zmq::{Context, SUB};
 use prost::Message;
 use serde_json::json;
@@ -19,6 +19,17 @@ struct Payload {
 fn main() {
   tauri::Builder::default()
       .invoke_handler(tauri::generate_handler![init_module_manager])
+      .setup(|app| {
+        let main_window = app.get_window("main").unwrap();
+        main_window.with_webview(|webview| {
+          #[cfg(windows)]
+          unsafe {
+            // see https://docs.rs/webview2-com/0.19.1/webview2_com/Microsoft/Web/WebView2/Win32/struct.ICoreWebView2Controller.html
+            webview.controller().SetZoomFactor(0.8).unwrap();
+          }
+        });
+        Ok(())
+      })
       .run(tauri::generate_context!())
       .expect("failed to run app");
 }

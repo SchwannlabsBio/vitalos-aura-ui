@@ -56,10 +56,10 @@
     "windows": [
       {
         "fullscreen": true,
-        "height": 1200,
-        "resizable": true,
+        "height": 1728,
+        "resizable": false,
         "title": "Aura UI",
-        "width": 1600,
+        "width": 2376,
         "decorations": false
       }
     ]
