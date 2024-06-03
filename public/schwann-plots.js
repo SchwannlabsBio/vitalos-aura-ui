@@ -5610,8 +5610,7 @@ var ASM_CONSTS = {
   
       EGL.contextAttributes.majorVersion = glesContextVersion - 1; // WebGL 1 is GLES 2, WebGL2 is GLES3
       EGL.contextAttributes.minorVersion = 0;
-
-      console.log(Module)
+  
       EGL.context = GL.createContext(Module['canvas'], EGL.contextAttributes);
   
       if (EGL.context != 0) {

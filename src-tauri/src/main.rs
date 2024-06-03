@@ -29,7 +29,7 @@ async fn init_module_manager(window: Window) {
   let subscriber = context.socket(SUB).expect("Failed to create SUB socket");
 
   subscriber.connect("tcp://localhost:5555").expect("Failed to connect to the publisher");
-  subscriber.set_subscribe(b"").expect("Failed to subscribe to all topics");
+  subscriber.set_subscribe(b"MOD-MESS").expect("Failed to subscribe to all topics");
 
   thread::spawn(move || {
     loop {
@@ -37,6 +37,23 @@ async fn init_module_manager(window: Window) {
       let json_data = String::from_utf8(message_payload[1].clone()).expect("Cannot convert to String");
       let payload: Payload = serde_json::from_str(&json_data).expect("Cannot parse json");
       window.emit("module-message", payload).unwrap();
+    }
+  });
+}
+#[tauri::command]
+async fn init_guardian_manager(window: Window) {
+  let context = Context::new();
+  let subscriber = context.socket(SUB).expect("Failed to create SUB socket");
+
+  subscriber.connect("tcp://localhost:5555").expect("Failed to connect to the publisher");
+  subscriber.set_subscribe(b"GUARD-MESS").expect("Failed to subscribe to all topics");
+
+  thread::spawn(move || {
+    loop {
+      let mut message_payload = subscriber.recv_multipart(0).expect("Failed to receive message");
+      let json_data = String::from_utf8(message_payload[1].clone()).expect("Cannot convert to String");
+      let payload: Payload = serde_json::from_str(&json_data).expect("Cannot parse json");
+      window.emit("guardian-message", payload).unwrap();
     }
   });
 }

@@ -1,6 +1,7 @@
 import Clock from "@/components/clock";
 import { WifiIcon, BatteryChargingIcon, SignalIcon } from "lucide-react";
 import {AlertStore} from "@/context/AlertContext";
+import ServerStatus from "@/components/bits/server-status";
 
 export default function TopBar() {
     const alerts = AlertStore(state => state.alerts);
@@ -8,7 +9,7 @@ export default function TopBar() {
         <div className="flex items-center sticky justify-between bg-background px-4 py-8 text-white">
             <div className="flex items-center space-x-4">
                 <Clock />
-                <span className="font-light">Ziyad Hameed</span>
+                <span className="font-light">Patient Name</span>
                 <span className="font-light">Adult</span>
             </div>
             <div className="flex items-center space-x-4 text-bold">
@@ -35,6 +36,7 @@ export default function TopBar() {
                 })}
             </div>
             <div className="flex items-center space-x-4">
+                <ServerStatus />
                 <WifiIcon className="h-6 w-6"/>
                 <SignalIcon className="h-6 w-6"/>
                 <BatteryChargingIcon className="h-6 w-6"/>

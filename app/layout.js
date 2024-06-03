@@ -19,6 +19,7 @@ import { listen } from "@tauri-apps/api/event";
 import ModuleMessageHandler from "@/lib/module-manager";
 import { ModuleStore } from "@/context/ModuleContext";
 import { AlertStore } from "@/context/AlertContext";
+import {GuardianStore} from "@/context/GuardianContext";
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -29,13 +30,13 @@ const fontSans = FontSans({
 export default function RootLayout({ children }) {
     const moduleStore = ModuleStore(state => state);
     const alertStore = AlertStore(state => state);
+    const guardianStore = GuardianStore(state => state);
 
     // Initialise Module Manager Thread.
     useEffect(() => {
         invoke('init_module_manager');
         const unlisten = listen('module-message', (event) => {
             let data = event.payload
-            console.log(data)
             ModuleMessageHandler(data, moduleStore, alertStore)
         });
 
@@ -44,6 +45,20 @@ export default function RootLayout({ children }) {
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    // Initialise Guardian Thread.
+    useEffect(() => {
+        invoke('init_guardian_manager');
+        const unlisten = listen('guardian-message', (event) => {
+            let data = event.payload
+            guardianStore.updateGuardian(data);
+        });
+
+        return () => {
+            unlisten.then(f => f());
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return (
         <html lang="en">
             <body className={fontSans.className}>

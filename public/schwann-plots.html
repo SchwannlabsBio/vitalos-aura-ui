@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <title>Dear ImGui Emscripten example</title>
+    <style>
+        body { margin: 0; background-color: black }
+        .emscripten {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+<script type='text/javascript'>
+    var Module = {
+        preRun: [],
+        postRun: [],
+        print: (function() {
+            return function(text) {
+                text = Array.prototype.slice.call(arguments).join(' ');
+                console.log(text);
+            };
+        })(),
+        printErr: function(text) {
+            text = Array.prototype.slice.call(arguments).join(' ');
+            console.error(text);
+        },
+        canvas: (function() {
+            var canvas = document.getElementById('canvas');
+            console.log(canvas)
+            //canvas.addEventListener("webglcontextlost", function(e) { alert('FIXME: WebGL context lost, please reload the page'); e.preventDefault(); }, false);
+            return canvas;
+        })(),
+        setStatus: function(text) {
+            console.log("status: " + text);
+        },
+        monitorRunDependencies: function(left) {
+            // no run dependencies to log
+        }
+    };
+    window.onerror = function() {
+        console.log("onerror: " + event);
+    };
+    function addDataFromJS(index, x, y) {
+        Module.ccall('dataAdd', null, ['number', 'number', 'number'], [index, x, y]);
+    }
+    function initDataFromJS() {
+        Module.ccall('dataInit', null);
+    }
+
+    Module.onRuntimeInitialized = () => {
+        initDataFromJS()
+        for(let i = 0; i <= 1000; i++) {
+            ((i) => {                                                       // IIFE starts here
+                let x = i / 100;
+                let y = Math.sin(x);
+                setTimeout(() => {
+                    addDataFromJS(i, x, y);
+                }, 1000);
+            })(i);
+        }
+    };
+</script>
+<script async type="text/javascript" src="schwann-plots.js"></script>
+</body>
+</html>

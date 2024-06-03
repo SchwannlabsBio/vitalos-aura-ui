@@ -12,9 +12,9 @@ let colours = {
 export default function VitalPlot({ children, ...props}) {
     return (
         <div>
-            <Card className={cn("rounded-lg shadow-md p-2 mb-2")}>
-                <CardContent className="h-36 p-0">
-                    {props.name === `I` ? <SchwannPlot/> : <div></div>}
+            <Card className={cn("rounded-lg shadow-md pb-2 mb-2")}>
+                <CardContent className="h-40 p-1">
+                   <SchwannPlot />
                 </CardContent>
             </Card>
         </div>
