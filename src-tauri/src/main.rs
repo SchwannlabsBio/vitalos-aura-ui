@@ -16,14 +16,6 @@ struct Payload {
   firmwareRevision: Option<String>,
 }
 
-#[derive(serde::Deserialize)]
-struct DivData {
-  width: f64,
-  height: f64,
-  top: f64,
-  left: f64,
-}
-
 fn main() {
   tauri::Builder::default()
       .invoke_handler(tauri::generate_handler![init_module_manager, plot_information])
