@@ -19,17 +19,19 @@ export default function ModulePopup() {
         <AlertDialog open={popupState} onOpenChange={setPopupState}>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>{(newModule && newModule.module) || ""} Installed.</AlertDialogTitle>
+                    <AlertDialogTitle>Setup {(newModule && newModule.module.toUpperCase()) || ""}.</AlertDialogTitle>
                     <AlertDialogDescription className="h-96">
-                        {(newModule && newModule.module) || ""} Module has been successfully installed at Slot {(newModule && newModule.slot) || ""} and is currently being calibrated.
+                        {(newModule && newModule.module.toUpperCase()) || ""} Module has been successfully {(newModule && newModule.status.toLocaleLowerCase()) || ""} at
+                        <span className="text-bold"> Slot {(newModule && newModule.slot) || ""} </span>
+                        and is {(newModule && newModule.status !== "initialised" ? "being calibrated" : "ready for use")}.
                         <Model3D />
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <Button variant="outline" onClick={closeAlert}>Close</Button>
-                    <Button disabled={(newModule && newModule.status === "MOD_CONN")}>
+                    <Button disabled={(newModule && newModule.status !== "initialised")}>
                         <Link href={"/settings/" + (newModule && newModule.module.toLocaleLowerCase()) || ""} onClick={closeAlert} >
-                            {(newModule && newModule.status === "MOD_CONN") &&
+                            {(newModule && newModule.status !== "initialised") &&
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin"/>}
                             Setup
                         </Link>
