@@ -17,7 +17,7 @@ export default function Layout({to, children}) {
             <div className="grid grid-cols-8 w-full items-start gap-6">
                 <nav className="grid gap-1 col-span-1 text-sm text-muted-foreground">
                     <div className="grid gap-1">
-                        <h1 class="text-xs font-bold text-primary uppercase px-3 py-2">Device Settings</h1>
+                        <h1 className="text-xs font-bold text-primary uppercase px-3 py-2">Device Settings</h1>
                         <Link className={className} href="/settings">General</Link>
                         <Link className={className} href="/network">Network</Link>
                         <Link className={className} href="/cellular">Cellular</Link>
@@ -26,7 +26,7 @@ export default function Layout({to, children}) {
                     </div>
                     <Separator />
                     <div className="grid gap-1">
-                        <h1 class="text-xs font-bold text-primary uppercase px-3 py-2">Guardian Settings</h1>
+                        <h1 className="text-xs font-bold text-primary uppercase px-3 py-2">Guardian Settings</h1>
                         <Link className="flex items-center px-3 py-2 rounded-lg transition-muted-foreground hover:text-primary" href="/settings">Account</Link>
                         <Link className="flex items-center px-3 py-2 rounded-lg transition-muted-foreground hover:text-primary" href="/settings">Server Options</Link>
                         <Link className="flex items-center px-3 py-2 rounded-lg transition-muted-foreground hover:text-primary" href="/settings">Permissions</Link>
@@ -34,7 +34,7 @@ export default function Layout({to, children}) {
                     </div>
                     <Separator />
                     <div className="grid gap-1">
-                        <h1 class="text-xs font-bold text-primary uppercase px-3 py-2">Alarm Settings</h1>
+                        <h1 className="text-xs font-bold text-primary uppercase px-3 py-2">Alarm Settings</h1>
                         <Link className={className} href="/settings/alarm/thresholds">Thresholds</Link>
                         <Link className={className} href="/settings/alarm/volume">Volume</Link>
                         <Link className={className} href="/settings/alarm/lamps">Lamp</Link>
@@ -42,7 +42,7 @@ export default function Layout({to, children}) {
                     <Separator />
                     {connectedModules.length > 0 ?
                         <div className="grid gap-1">
-                            <h1 class="text-xs font-bold text-primary uppercase px-3 py-2">Module Settings</h1>
+                            <h1 className="text-xs font-bold text-primary uppercase px-3 py-2">Module Settings</h1>
                             {
                                 connectedModules.map((module, index) => {
                                     return (
