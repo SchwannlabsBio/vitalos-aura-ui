@@ -1,7 +1,7 @@
 mod handler;
 
 use std::thread;
-use tauri::{Window,Manager};
+use tauri::{Window, Manager, WindowBuilder, WindowUrl, Position, LogicalPosition, Size, LogicalSize};
 use zmq::{Context, SUB};
 use prost::Message;
 use serde_json::json;
@@ -16,18 +16,37 @@ struct Payload {
   firmwareRevision: Option<String>,
 }
 
+#[derive(serde::Deserialize)]
+struct DivData {
+  width: f64,
+  height: f64,
+  top: f64,
+  left: f64,
+}
+
 fn main() {
   tauri::Builder::default()
-      .invoke_handler(tauri::generate_handler![init_module_manager])
+      .invoke_handler(tauri::generate_handler![init_module_manager, plot_information])
       .setup(|app| {
         let main_window = app.get_window("main").unwrap();
-        main_window.with_webview(|webview| {
-          #[cfg(windows)]
-          unsafe {
-            // see https://docs.rs/webview2-com/0.19.1/webview2_com/Microsoft/Web/WebView2/Win32/struct.ICoreWebView2Controller.html
-            webview.controller().SetZoomFactor(0.8).unwrap();
-          }
-        });
+        if let Ok(Some(monitor)) = main_window.current_monitor() {
+          let screen_size = monitor.size();
+          let scale_factor = monitor.scale_factor() as u32;
+          println!("Screen size: {:?}, Scale factor: {:?}", screen_size, scale_factor);
+
+          // Calculate the logical size with scale factor 1.0
+          let logical_width = screen_size.width / scale_factor;
+          let logical_height = screen_size.height / scale_factor;
+          main_window.set_size(Size::Logical(LogicalSize {
+            width: logical_width.into(),
+            height: logical_height.into(),
+          })).unwrap();
+
+          main_window.set_position(Position::Logical(LogicalPosition {
+            x: 0.0,
+            y: 0.0,
+          })).unwrap();
+        }
         Ok(())
       })
       .run(tauri::generate_context!())
@@ -68,4 +87,33 @@ async fn init_guardian_manager(window: Window) {
     }
   });
 }
+#[tauri::command]
+fn plot_information(handle: tauri::AppHandle, data: serde_json::Value) {
 
+  // Convert to HashMap
+  if let Some(map) = data.as_object() {
+    // Iterate over key-object pairs
+    for (key, value) in map.iter() {
+      if let Some(obj) = value.as_object() {
+        let left = obj.get("left").and_then(|v| v.as_f64()).unwrap_or_default();
+        let top = obj.get("top").and_then(|v| v.as_f64()).unwrap_or_default();
+        let width = obj.get("width").and_then(|v| v.as_f64()).unwrap_or_default();
+        let height = obj.get("height").and_then(|v| v.as_f64()).unwrap_or_default();
+        println!("Key: {}, Left: {}, Top: {}, Width: {}, Height: {}", key, left, top, width, height);
+
+        // Create a new window for this key-object pair
+        let _ = tauri::WindowBuilder::new(
+          &handle,
+          key, /* the unique window label */
+          WindowUrl::External("https://tauri.app/".parse().unwrap())
+        )
+            .inner_size(width, height)
+            .position(left, top)
+            .decorations(false)
+            .always_on_top(true)
+            .build()
+            .unwrap();
+      }
+    }
+  }
+}
