@@ -45,7 +45,6 @@ export default function Layout({to, children}) {
                             <h1 class="text-xs font-bold text-primary uppercase px-3 py-2">Module Settings</h1>
                             {
                                 connectedModules.map((module, index) => {
-                                    console.log(module)
                                     return (
                                         <Link
                                             className={className}
@@ -60,9 +59,7 @@ export default function Layout({to, children}) {
                         : null
                     }
                 </nav>
-                <div className="grid gap-6 col-span-6 pt-2">
-                    {children}
-                </div>
+                {children}
             </div>
         </main>
     )
