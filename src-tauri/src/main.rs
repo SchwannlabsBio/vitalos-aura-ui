@@ -15,7 +15,7 @@ struct Payload {
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![init_module_manager, plot_information])
+        .invoke_handler(tauri::generate_handler![init_module_manager])
         .setup(|app| {
             let main_window = app.get_window("main").unwrap();
             if let Ok(Some(monitor)) = main_window.current_monitor() {

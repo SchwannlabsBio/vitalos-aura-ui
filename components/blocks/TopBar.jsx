@@ -2,15 +2,17 @@ import Clock from "@/components/clock";
 import { WifiIcon, BatteryChargingIcon, SignalIcon } from "lucide-react";
 import {AlertStore} from "@/context/AlertContext";
 import ServerStatus from "@/components/bits/server-status";
+import PatientContext from "@/context/PatientContext";
 
 export default function TopBar() {
     const alerts = AlertStore(state => state.alerts);
+    const patient = PatientContext(state => state.patientInfo);
     return (
         <div className="flex items-center sticky justify-between bg-background px-4 py-8 text-white">
             <div className="flex items-center space-x-4">
                 <Clock />
-                <span className="font-light">Patient Name</span>
-                <span className="font-light">Adult</span>
+                <span className="font-light">{patient.firstName ? patient.firstName + " " + patient.lastName : ""}</span>
+                <span className="font-light">{patient.firstName ? patient.category : ""}</span>
             </div>
             <div className="flex items-center space-x-4 text-bold">
                 {alerts.map((alert, index) => {
