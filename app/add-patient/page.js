@@ -58,8 +58,8 @@ export default function Component() {
     };
 
     return (
-        <form className="w-full bg-muted/40" onSubmit={handleSubmit}>
-            <Card className="w-full">
+        <form className="w-full " onSubmit={handleSubmit}>
+            <Card className="w-full bg-muted/40">
                 <CardHeader>
                     <CardTitle>Patient Information</CardTitle>
                     <CardDescription>Please fill out the following information for the patient.</CardDescription>
@@ -135,8 +135,8 @@ export default function Component() {
                                 <SelectValue placeholder="Select gender" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="male">Male</SelectItem>
-                                <SelectItem value="female">Female</SelectItem>
+                                <SelectItem value="Male">Male</SelectItem>
+                                <SelectItem value="Female">Female</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>

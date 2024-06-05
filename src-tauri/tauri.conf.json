@@ -55,7 +55,7 @@
     },
     "windows": [
       {
-        "fullscreen": false,
+        "fullscreen": true,
         "height": 1200,
         "resizable": true,
         "title": "Aura UI",
