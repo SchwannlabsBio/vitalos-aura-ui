@@ -16,10 +16,10 @@ import {
 import { Server } from "lucide-react"
 import { GuardianStore } from "@/context/GuardianContext"
 import { cn } from "@/lib/utils"
-import PatientContext from "@/context/PatientContext";
+import PatientStore from "@/context/PatientContext";
 
 export default function PatientInfo() {
-    const patient = PatientContext(state => state.patientInfo);
+    const patient = PatientStore(state => state.patientInfo);
 
     return (
         <DropdownMenu>

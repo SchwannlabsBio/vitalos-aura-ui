@@ -4,18 +4,19 @@ import PatientStore from "@/context/PatientContext"; // Adjust the path accordin
 
 //UI Imports
 import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card"
+import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
+import { PopoverTrigger, PopoverContent, Popover } from "@/components/ui/popover"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
-import { PopoverTrigger, PopoverContent, Popover } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
 import { Textarea } from "@/components/ui/textarea"
 
 export default function Component() {
     const { updatePatientInfo } = PatientStore();
     const [formData, setFormData] = useState({
+        exists: false,
         lastName: "",
         firstName: "",
         middleName: "",
@@ -53,7 +54,7 @@ export default function Component() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData)
+        formData.exists = true;
         updatePatientInfo(formData);
     };
 

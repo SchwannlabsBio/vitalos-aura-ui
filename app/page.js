@@ -18,7 +18,6 @@ export default function Page() {
 
     useEffect(() => {
         const dimensions = {}
-        console.log(plotRefI)
         if(plotRefI.current) {
             dimensions['I'] = plotRefI.current.getBoundingClientRect();
         }
@@ -35,7 +34,6 @@ export default function Page() {
             dimensions['etCO2'] = plotRefCO2.current.getBoundingClientRect();
         }
         setDimensions(dimensions);
-        console.log(dimensions['I'])
         invoke('plot_information', {data: dimensions})
             .then(r => console.log(r))
             .catch(e => console.error(e))

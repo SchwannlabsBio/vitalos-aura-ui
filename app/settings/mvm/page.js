@@ -5,7 +5,6 @@ import EcgSettings from "@/components/blocks/ecgSettings";
 export default function Page() {
     const connectedModules = ModuleStore(state => state.activeModules)
     const activeMVM = connectedModules.find(module => module.module === "mvm")
-    console.log(connectedModules, activeMVM)
     return (
         <>
         <div className="grid gap-6 col-span-5 pt-2">
@@ -72,7 +71,7 @@ export function MVMTabs() {
                     <CardHeader>
                         <CardTitle>Password</CardTitle>
                         <CardDescription>
-                            Change your password here. After saving, you'll be logged out.
+                            Change your password here. After saving, you will be logged out.
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-2">
@@ -95,7 +94,7 @@ export function MVMTabs() {
                     <CardHeader>
                         <CardTitle>Password</CardTitle>
                         <CardDescription>
-                            Change your password here. After saving, you'll be logged out.
+                            Change your password here. After saving, you will be logged out.
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-2">
@@ -118,7 +117,7 @@ export function MVMTabs() {
                     <CardHeader>
                         <CardTitle>Password</CardTitle>
                         <CardDescription>
-                            Change your password here. After saving, you'll be logged out.
+                            Change your password here. After saving, you will be logged out.
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-2">

@@ -1,7 +1,9 @@
 import create from "zustand";
+import { invoke } from '@tauri-apps/api/tauri';
 
-const PatientContext = create((set) => ({
+const PatientStore = create((set) => ({
     patientInfo: {
+        exists: false,
         lastName: "",
         firstName: "",
         middleName: "",
@@ -15,7 +17,14 @@ const PatientContext = create((set) => ({
         gender: "",
         notes: ""
     },
-    updatePatientInfo: (info) => set({ patientInfo: info })
+    updatePatientInfo: async (info) => {
+        set({patientInfo: info})
+        await invoke('update_patient_info', { info });
+    },
+    createPatient: async (info) => {
+        set({patientInfo: info})
+        await invoke('update_patient_info', { info });
+    }
 }));
 
-export default PatientContext;
+export default PatientStore;
