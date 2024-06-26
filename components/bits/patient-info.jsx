@@ -17,6 +17,8 @@ import { Server } from "lucide-react"
 import { GuardianStore } from "@/context/GuardianContext"
 import { cn } from "@/lib/utils"
 import PatientStore from "@/context/PatientContext";
+import {Button} from "@/components/ui/button";
+import React from "react";
 
 export default function PatientInfo() {
     const patient = PatientStore(state => state.patientInfo);
@@ -51,6 +53,11 @@ export default function PatientInfo() {
                         <div className="text-sm font-medium">MRN</div>
                         <div className="text-sm font-medium">{patient.firstName ? patient.mrn : ""}</div>
                     </div>
+                </div>
+                <DropdownMenuSeparator/>
+                <div className="grid grid-cols-2 gap-4 p-4">
+                    <Button type="submit">Edit</Button>
+                    <Button variant="outline">Discharge</Button>
                 </div>
             </DropdownMenuContent>
         </DropdownMenu>

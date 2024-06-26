@@ -20,10 +20,20 @@ export default function EcgSettings() {
             <div className="grid grid-cols-2 gap-4 w-full">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Primary Leads</CardTitle>
-                        <CardDescription>Select the primary leads used for ECG derivation.</CardDescription>
+                        <CardTitle>Leads Settings</CardTitle>
+                        <CardDescription>Settings related to the ECG leads</CardDescription>
                     </CardHeader>
                     <CardContent className="grid gap-4">
+                        <Select>
+                            <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Lead Type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="adult">Adult</SelectItem>
+                                <SelectItem value="neonatal">Neonatal</SelectItem>
+                                <SelectItem value="pediatric">Pediatric</SelectItem>
+                            </SelectContent>
+                        </Select>
                         <Select>
                             <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select primary I" />
@@ -66,84 +76,202 @@ export default function EcgSettings() {
                 </Card>
                 <Card>
                     <CardHeader>
-                        <CardTitle>ECG Leads</CardTitle>
-                        <CardDescription>Adjust the zoom level for each ECG lead.</CardDescription>
+                        <CardTitle>Pacemaker Settings</CardTitle>
+                        <CardDescription>Settings related to Pace detection</CardDescription>
+                    </CardHeader>
+                    <CardContent className="grid gap-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <Label>Paced</Label>
+                            <Switch />
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <Label>Pacer Rejection</Label>
+                            <Switch />
+                        </div>
+                    </CardContent>
+                </Card>
+                <Card className="col-span-2">
+                    <CardHeader>
+                        <CardTitle>Waveform Settings</CardTitle>
+                        <CardDescription>Adjust settings related to the ECG Waveform</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead I</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
+                        <div class="grid grid-cols-2 gap-8">
+                            <div class="col-span-1 space-y-2">
+                                <Label>Waveform Format</Label>
+                                <Select>
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Cabrera" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="default">Standalone</SelectItem>
+                                        <SelectItem value="cabrera">Cabrera</SelectItem>
+                                    </SelectContent>
+                                </Select>
                             </div>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead II</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
+                            <div class="col-span-1 space-y-2">
+                                <Label>Waveform View</Label>
+                                <Select className="col-span-1">
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Half Screen" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="full">Full Screen</SelectItem>
+                                        <SelectItem value="half">Half Screen</SelectItem>
+                                    </SelectContent>
+                                </Select>
                             </div>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead III</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
+                            <div className="grid grid-cols-2 gap-4">
+                                <Label className="col-span-2">Gain Settings</Label>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead I</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead II</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead III</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead aVL</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead aVF</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead aVF</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V1</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V2</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V3</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V4</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V5</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V6</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead aVL</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
+                            <div className="grid grid-cols-2 gap-4">
+                                <Label className="col-span-2">Speed Settings</Label>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead I</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead II</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead III</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead aVL</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead aVF</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead aVF</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V1</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V2</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V3</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V4</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V5</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Label>Lead V6</Label>
+                                    <Slider defaultValue={[50]} id="lead1" max={100} />
+                                </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead aVF</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
+                            <div class="col-span-1 space-y-2">
+                                <Label>Waveform Filters</Label>
+                                <Select className="col-span-1">
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Diagnostic" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="full">Monitor</SelectItem>
+                                        <SelectItem value="half">Surgical</SelectItem>
+                                        <SelectItem value="half">Diagnostic</SelectItem>
+                                        <SelectItem value="half">Auto</SelectItem>
+                                    </SelectContent>
+                                </Select>
                             </div>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead aVF</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
+                            <div class="col-span-1 space-y-2">
+                                <div className="grid space-y-2">
+                                    <Label className="pb-4">Notch Filter</Label>
+                                    <Switch />
+                                </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead V1</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
+                            <div class="col-span-1 space-y-2">
+                                <Label>Original</Label>
+                                <img src="/ploti-setting.gif" className="object-cover h-fit w-fit"/>
                             </div>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead V2</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
-                            </div>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead V3</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
-                            </div>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead V4</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
-                            </div>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead V5</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
-                            </div>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Label>Lead V6</Label>
-                                <Slider defaultValue={[50]} id="lead1" max={100} />
+                            <div class="col-span-1 space-y-2">
+                                <Label>Filtered</Label>
+                                <img src="/ploti-setting.gif" className="object-cover h-fit w-fit"/>
                             </div>
                         </div>
                     </CardContent>
                 </Card>
                 <Card>
                     <CardHeader>
-                        <CardTitle>ECG Filters</CardTitle>
+                        <CardTitle>Analysis</CardTitle>
                         <CardDescription>Select the appropriate filter for your ECG monitoring.</CardDescription>
                     </CardHeader>
-                    <CardContent className="grid grid-cols-2">
-                        <DropdownMenu className="col-span-2">
-                            <DropdownMenuTrigger asChild>
-                                <Button className="w-full justify-between" variant="outline">
-                                    <span>ECG Filter</span>
-                                    <ChevronsUpDownIcon className="h-4 w-4" />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="start">
-                                <DropdownMenuItem value="monitor">Monitor</DropdownMenuItem>
-                                <DropdownMenuItem value="surgical">Surgical</DropdownMenuItem>
-                                <DropdownMenuItem value="diagnostic">Diagnostic</DropdownMenuItem>
-                                <DropdownMenuItem defaultChecked value="auto">
-                                    Auto
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                    <CardContent className="grid space-y-2">
+                        <div className="grid space-y-2">
+                            <Label className="pb-4">Smart Lead-off detection</Label>
+                            <Switch/>
+                        </div>
+                        <div className="grid space-y-2">
+                            <Label className="pb-4">Alarm Intelligence</Label>
+                            <Switch/>
+                        </div>
+                        <div className="grid space-y-2">
+                            <Label className="pb-4">Analysis Source</Label>
+                            <Switch/>
+                        </div>
                     </CardContent>
                 </Card>
                 <Card>

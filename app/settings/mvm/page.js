@@ -7,7 +7,7 @@ export default function Page() {
     const activeMVM = connectedModules.find(module => module.module === "mvm")
     return (
         <>
-        <div className="grid gap-6 col-span-5 pt-2">
+        <div className="grid gap-6 col-span-5 pt-2 overflow-y-auto">
             <MVMTabs/>
         </div>
         <div className="col-span-2 pt-2 mr-2">

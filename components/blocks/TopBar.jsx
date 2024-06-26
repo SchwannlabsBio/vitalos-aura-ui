@@ -1,3 +1,4 @@
+"use client"
 import Clock from "@/components/clock";
 import { WifiIcon, BatteryChargingIcon, SignalIcon } from "lucide-react";
 import {AlertStore} from "@/context/AlertContext";

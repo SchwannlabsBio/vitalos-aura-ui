@@ -1,3 +1,4 @@
+"use client"
 // Context Imports
 import { ModuleStore } from "@/context/ModuleContext";
 

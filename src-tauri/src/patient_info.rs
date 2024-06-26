@@ -1,11 +1,12 @@
 use redis::Commands;
 
 #[derive(serde::Deserialize, serde::Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct PatientInfo {
     exists: bool,
-    lastName: String,
-    firstName: String,
-    middleName: String,
+    last_name: String,
+    first_name: String,
+    middle_name: String,
     mrn: String,
     category: String,
     paced: bool,

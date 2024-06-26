@@ -1,28 +1,9 @@
 mod module_manager;
-mod patient_info;
-
-use std::thread;
-use tauri::{LogicalPosition, LogicalSize, Manager, Position, Size, Window, WindowUrl};
-use zmq::{Context, Socket, Error, SUB};
 use module_manager::init_module_manager;
+mod patient_info;
 use patient_info::{update_patient_info, get_patient};
 
-#[derive(Clone, serde::Deserialize, serde::Serialize, Debug)]
-struct Payload {
-    action: String,
-    product_id: String,
-    slot: String,
-    slot_file: String,
-    serial_id: Option<String>,
-    firmware_revision: Option<String>,
-}
-#[derive(Clone, serde::Deserialize, serde::Serialize, Debug)]
-struct AlarmPayload {
-    id: String,
-    message: String,
-    kind: String,
-    level: f32,
-}
+use tauri::{LogicalPosition, LogicalSize, Manager, Position, Size};
 
 fn main() {
     tauri::Builder::default()

@@ -13,14 +13,22 @@ let colours = {
 
 // eslint-disable-next-line react/display-name
 const VitalPlot = forwardRef(({ children, ...props }, ref) => {
+    const {id, name} = props;
     return (
-        <div ref={ref}>
-            <Card className={cn("rounded-lg shadow-md pb-2 mb-2")}>
-                <CardContent className="h-40 p-1">
-                    <SchwannPlot />
-                    {children}
-                </CardContent>
-            </Card>
+        <div className="relative w-full h-40 bg-background mb-3 rounded-lg">
+            <img src={"/plot"+name.toLowerCase()+".gif"} className="absolute w-full h-full object-cover"/>
+            <div className={cn("relative z-10 flex items-center justify-between p-2 text-sm font-semibold",colours[id])}>
+                <div className="flex space-x-4">
+                    <span>{name}</span>
+                    <span>X1</span>
+                    <span>Diagnostic</span>
+                    <span>Notch 50Hz</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                    {/*<HeartIcon className="text-red-500 h-4 w-4"/>*/}
+                    <span className="bg-yellow-300 text-black px-2 py-1 rounded">**HR/PR Low Limit &lt; 80</span>
+                </div>
+            </div>
         </div>
     )
 })

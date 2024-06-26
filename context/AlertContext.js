@@ -3,14 +3,14 @@ import {create} from 'zustand';
 export const AlertStore = create(set => ({
     alerts: [{
         id: 1,
-        message: 'Alert Example',
+        message: 'Arrhythmia',
         source: 'MVM.ECG',
         kind: 'urgent',
         level: 9,
         timeout: 3000,
     }, {
         id: 1,
-        message: 'Hello World',
+        message: 'Guardian Connected',
         source: 'MVM.ECG',
         kind: 'success',
         level: 3,

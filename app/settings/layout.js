@@ -14,13 +14,12 @@ export default function Layout({to, children}) {
             <div className="w-full gap-2">
                 <h1 className="text-3xl font-bold pl-2">Settings</h1>
             </div>
-            <div className="grid grid-cols-8 w-full items-start gap-6">
+            <div className="grid grid-cols-8 w-full items-start gap-6 overflow-y-auto">
                 <nav className="grid gap-1 col-span-1 text-sm text-muted-foreground">
                     <div className="grid gap-1">
                         <h1 className="text-xs font-bold text-primary uppercase px-3 py-2">Device Settings</h1>
                         <Link className={className} href="/settings">General</Link>
-                        <Link className={className} href="/network">Network</Link>
-                        <Link className={className} href="/cellular">Cellular</Link>
+                        <Link className={className} href="/settings/network">Network</Link>
                         <Link className={className} href="/display">Display</Link>
                         <Link className={className} href="/battery">Battery</Link>
                     </div>
