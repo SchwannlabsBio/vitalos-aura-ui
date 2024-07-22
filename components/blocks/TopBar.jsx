@@ -1,7 +1,6 @@
 "use client"
 import Clock from "@/components/clock";
 import { WifiIcon, BatteryChargingIcon, SignalIcon } from "lucide-react";
-import {AlertStore} from "@/context/AlertContext";
 import ServerStatus from "@/components/bits/server-status";
 import PatientStore from "@/context/PatientContext";
 import PatientInfo from "@/components/bits/patient-info";
