@@ -15,8 +15,8 @@ let colours = {
 const VitalPlot = forwardRef(({ children, ...props }, ref) => {
     const {id, name} = props;
     return (
-        <div className="relative w-full h-40 bg-background mb-3 rounded-lg">
-            <img src={"/plot"+name.toLowerCase()+".gif"} className="absolute w-full h-full object-cover"/>
+        <Card className={cn("rounded-lg shadow-md h-36 mb-3 p-0 relative")}>
+            <img src={"/plot"+name.toLowerCase()+".gif"} className="absolute w-full h-full object-cover p-2"/>
             <div className={cn("relative z-10 flex items-center justify-between p-2 text-sm font-semibold",colours[id])}>
                 <div className="flex space-x-4">
                     <span>{name}</span>
@@ -29,7 +29,8 @@ const VitalPlot = forwardRef(({ children, ...props }, ref) => {
                     <span className="bg-yellow-300 text-black px-2 py-1 rounded">**HR/PR Low Limit &lt; 80</span>
                 </div>
             </div>
-        </div>
+        </Card>
+
     )
 })
 export default VitalPlot;

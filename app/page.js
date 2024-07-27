@@ -11,12 +11,13 @@ export default function Page() {
                 <VitalPlot id="II" name="II"/>
                 <VitalPlot id="Pleth" name="Pleth"/>
                 <VitalPlot id="Art" name="Art"/>
+                <VitalPlot id="Art" name="Art"/>
                 <VitalPlot id="etCO2" name="etCO2"/>
             </div>
             <div className="col-span-1">
                 <VitalTrend name="ECG"/>
-                <VitalTrend name="II"/>
                 <VitalTrend name="Pleth"/>
+                <VitalTrend name="Art"/>
                 <VitalTrend name="Art"/>
                 <VitalTrend name="etCO2"/>
             </div>
